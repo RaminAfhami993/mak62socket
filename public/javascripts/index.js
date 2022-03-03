@@ -1,25 +1,74 @@
 $(document).ready(() => {
+    const clientSocket = io();
+    let name;
+
     $('#loginBtn').click(() => {
-        const name = $('#name').val();
+        name = $('#name').val();
 
         if (!name) {
 
         } else {
-            const clientSocket = io();
+            $('#loginSection').css('display', 'none');
+            $('#chatSection').css('display', 'flex')
 
             clientSocket.emit('login', {name});
-
-
-
-
-
-
-
-
-
-            clientSocket.on('newUser', data => {
-                console.log('new user --->', data);
-            });        
         };
     });
+
+
+    $('#sendBtn').click(() => {
+        const message = $('#message').val();
+        console.log(message);
+        $('#messageBox').append(`
+        <br>
+        <div>
+            <span class="green">you:</span>
+            <br>
+            <span>${message}</span>
+        </div>
+        `)
+
+        clientSocket.emit('message', {message});
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+    // on events
+    clientSocket.on('allUsers', data => {
+        console.log('all users --->', data);
+
+        $('#onlineUsersList').html('');
+
+        for (let i = 0; i < data.users.length; i++) {
+
+            if (name == data.users[i].name) {
+                $('#onlineUsersList').append(`<li class="green">${data.users[i].name}</li>`)
+            } else {
+                $('#onlineUsersList').append(`<li>${data.users[i].name}</li>`)
+            }
+        }
+    });
+
+
+    clientSocket.on('newMessage', data => {
+        console.log(data);
+
+        $('#messageBox').append(`
+        <br>
+        <div>
+            <span>${data.name}:</span>
+            <br>
+            <span>${data.message}</span>
+        </div>
+        `)
+    })
 })

@@ -7,7 +7,7 @@
   </head>
   <body>
 
-    <div class="container row" id="loginSection">
+    <div class="row" id="loginSection">
       <form class="offset-4 col-4">
         <div class="form-group">
           <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter your display name">
@@ -18,8 +18,30 @@
 
 
 
-    <div class="container row" id="chatSection">
-      chat section
+    <div class="row" id="chatSection">
+      <div class="col-8" id="chatBox">
+        <div class="col-12" id="messageBox">
+
+        </div>
+        <div class="col-12" id="chatBar">
+          <form class="col-12">
+            <div class="input-group mb-3">
+              <input type="text" id="message" class="form-control" placeholder="Enter your message" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="sendBtn">Send</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-4">
+        <div>
+          online users
+        </div>
+        <ul id="onlineUsersList">
+          
+        </ul>
+      </div>
     </div>
 
 
@@ -31,3 +53,7 @@
     <script src="/javascripts/index.js"></script>
   </body>
 </html>
+
+
+
+
